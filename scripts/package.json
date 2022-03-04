@@ -1,0 +1,20 @@
+{
+  "name": "load-test-script",
+  "version": "1.0.0",
+  "description": "a script to simulate parallel http requests",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "load-testing"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.26.0",
+    "bluebird": "^3.7.2",
+    "config": "^3.3.7"
+  }
+}
