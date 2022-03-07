@@ -32,7 +32,7 @@ class Show < ApplicationRecord
 
     private
         def end_time_is_after_start_time
-            if end_time < start_time
+            if start_time && end_time && end_time < start_time
                 errors.add(:end_time, 'cannot be before the start time')
             end
         end
