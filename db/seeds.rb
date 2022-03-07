@@ -31,3 +31,9 @@ shows = Show.create([{
     end_time: DateTime.now.change({hour: 20, min: 0, sec: 0}),
     hall: halls.first,
 }])
+
+reservations = Reservation.create({
+    total_seats: 10,
+    show: shows.first,
+    user: users.first
+})
