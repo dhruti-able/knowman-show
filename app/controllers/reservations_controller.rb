@@ -20,14 +20,17 @@ class ReservationsController < ApplicationController
     elsif @show.cancelled?
       render json: { "@errors": "show is cancelled!" }, status: :unprocessable_entity
     else
-      @reservation = @show.reservations.new(reservation_params)
-      @reservation.user = current_user
-      @reservation.seats = "#{@show.reserved_seats + 1} to #{@show.reserved_seats + reservation_params[:total_seats]}"  # TODO: change to better format
+      Show.transaction do
+        @show.lock!
+        @reservation = @show.reservations.new(reservation_params)
+        @reservation.user = current_user
+        @reservation.seats = "#{@show.reserved_seats + 1} to #{@show.reserved_seats + reservation_params[:total_seats]}"  # TODO: change to better format
 
-      if @reservation.save
-        render json: @reservation, status: :created
-      else
-        render json: @reservation.errors, status: :unprocessable_entity
+        if @reservation.save!
+          render json: @reservation, status: :created
+        else
+          render json: @reservation.errors, status: :unprocessable_entity
+        end
       end
     end
   end
