@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   has_secure_password
 
-  has_many :reservations
+  has_many :reservations, dependent: :destroy
   
   # validations
   validates :name, presence: true

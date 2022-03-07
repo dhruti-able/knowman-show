@@ -1,5 +1,5 @@
 class Hall < ApplicationRecord
-    has_many :shows
+    has_many :shows, dependent: :destroy
     
     # validations
     validates :name, presence: true
