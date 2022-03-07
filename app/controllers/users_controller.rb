@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :update, :destroy]
   before_action :require_signin, except: [:create]
+  before_action :require_admin, only: [:index]
   before_action :require_correct_user, only: [:update, :destroy]
 
   def index
@@ -10,6 +11,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    # only admin and current user should be able to view user details
     render json: @user
   end
 
